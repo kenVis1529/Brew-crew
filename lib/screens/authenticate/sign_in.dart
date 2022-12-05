@@ -26,14 +26,14 @@ class _SignInState extends State<SignIn> {
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Column(
           children: [
-            TextButton(
+            ElevatedButton(
               onPressed: () async {
                 dynamic result = await auth.signInAnon();
                 if (result == null) {
                   log('Error with signing in');
                 } else {
                   log('signed in');
-                  log(result.toString());
+                  log(result.uid.toString());
                 }
               },
               child: const Text('Sign in'),
