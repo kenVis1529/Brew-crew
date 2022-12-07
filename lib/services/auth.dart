@@ -5,6 +5,13 @@ import 'package:brewcrew/modules/user.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  // Cập nhật liên tục về thông tin người dùng mỗi lần đăng kí hay đăng nhập
+  Stream<MyUser?> get user {
+    return _auth
+        .authStateChanges()
+        .map((User? user) => _userFromFirebaseuser(user));
+  }
+
   // Dùng để chuyển dữ liệu User của Firebase sang kiểu dữ liệu MyUser của mình
   MyUser? _userFromFirebaseuser(User? user) {
     return user != null ? MyUser(uid: user.uid) : null;
