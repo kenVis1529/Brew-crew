@@ -1,6 +1,8 @@
 import 'package:brewcrew/screens/wrapper.dart';
+import 'package:brewcrew/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +20,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Wrapper(),
+    /// Stream Provider nhận thông tin từ Stream get ở auth.dart
+    return StreamProvider.value(
+      initialData: null,
+      value: AuthService().user,
+      child: const MaterialApp(
+        home: Wrapper(),
+      ),
     );
   }
 }
