@@ -36,7 +36,7 @@ class _SignInState extends State<SignIn> {
                   log(result.uid.toString());
                 }
               },
-              child: const Text('Sign in'),
+              child: const Text('Sign in anon'),
             )
           ],
         ),
