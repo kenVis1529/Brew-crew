@@ -15,8 +15,22 @@ class _AuthenticateState extends State<Authenticate> {
     super.initState();
   }
 
+  bool showSignIn = true;
+
+  /// Hàm toggleView đổi từ SignIn sang Register và ngược lại
+  /// bằng cách đảo giá trị showSignIn
+  void toggleView() {
+    return setState(() {
+      showSignIn = !showSignIn;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Register();
+    /// showSignIn = true thì hiện SignIn form
+    /// và ngược lại thì hiện Register form
+    return (showSignIn)
+        ? SignIn(toggleView: toggleView)
+        : Register(toggleView: toggleView);
   }
 }
