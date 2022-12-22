@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:brewcrew/services/auth.dart';
+import 'package:brewcrew/shared/constants.dart';
 
 class Register extends StatefulWidget {
   // Thuộc tính toggleView đại diện cho hàm điều hướng toggleView ở auth.dart
@@ -57,6 +58,8 @@ class _RegisterState extends State<Register> {
               const SizedBox(height: 20.0),
               // Email field
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: "Email"),
+
                 /// validator dùng để kiểm tra giá trị nhập vào
                 validator: (value) => (value == null ? "Enter an email" : null),
                 onChanged: (value) {
@@ -68,6 +71,7 @@ class _RegisterState extends State<Register> {
               const SizedBox(height: 20.0),
               // Password field
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: "Password"),
                 validator: (value) => (value!.length < 8
                     ? "Enter a password contains 8+ chars"
                     : null),

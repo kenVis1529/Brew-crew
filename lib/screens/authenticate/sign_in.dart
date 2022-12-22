@@ -1,4 +1,5 @@
 import 'package:brewcrew/services/auth.dart';
+import 'package:brewcrew/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -54,6 +55,13 @@ class _SignInState extends State<SignIn> {
               const SizedBox(height: 20.0),
               // Username field
               TextFormField(
+                /// Thuộc tính decoration giúp có thể chỉnh sửa TextField
+                ///
+                /// Biến textInputDecoration là một Object gồm các thông tin trang trí của TextFormField,
+                /// được khai báo ở /shared/constants.dart
+                ///
+                /// .copyWith() có thể tạo ra một bản sao của Object với thuộc tính và giá trị mới
+                decoration: textInputDecoration.copyWith(hintText: "Email"),
                 validator: (value) => (value == null ? "Enter an email" : null),
                 onChanged: (value) {
                   setState(() {
@@ -64,6 +72,7 @@ class _SignInState extends State<SignIn> {
               const SizedBox(height: 20.0),
               // Password field
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: "Password"),
                 validator: (value) => value!.length < 8
                     ? "Enter a password contains 8+ chars"
                     : null,
