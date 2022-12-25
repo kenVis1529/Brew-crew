@@ -16,4 +16,10 @@ class DatabaseService {
       "strength": strength,
     });
   }
+
+  /// Hàm stream mà sẽ trả về kết quả của brewCollection
+  // get brew stream
+  Stream<QuerySnapshot> get brews {
+    return brewCollection.snapshots();
+  }
 }
