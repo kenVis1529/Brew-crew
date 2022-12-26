@@ -1,3 +1,4 @@
+import 'package:brewcrew/modules/brew.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -17,9 +18,20 @@ class DatabaseService {
     });
   }
 
+  // Brew list từ Snapshot
+  List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs
+        .map((doc) => Brew(
+              name: doc.get('name') ?? '',
+              sugar: doc.get('sugar') ?? '0',
+              strength: doc.get('strength') ?? 0,
+            ))
+        .toList();
+  }
+
   /// Hàm stream mà sẽ trả về kết quả của brewCollection
   // get brew stream
-  Stream<QuerySnapshot> get brews {
-    return brewCollection.snapshots();
+  Stream<List<Brew>> get brews {
+    return brewCollection.snapshots().map(_brewListFromSnapshot);
   }
 }
