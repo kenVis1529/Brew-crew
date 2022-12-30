@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:brewcrew/modules/brew.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:brewcrew/screens/home/brew_tile.dart';
 
 class BrewList extends StatefulWidget {
   const BrewList({super.key});
@@ -18,9 +19,13 @@ class _BrewListState extends State<BrewList> {
 
     if (brews != null) {
       for (var e in brews) {
-        log("${e.name} ${e.sugar} ${e.strength}");
+        log("${e.name} ${e.sugars} ${e.strength}");
       }
     }
-    return Container();
+
+    /// Liệt kê danh sách thông tin người dùng
+    return ListView.builder(
+        itemCount: brews?.length,
+        itemBuilder: (context, index) => BrewTile(brew: brews![index]));
   }
 }
