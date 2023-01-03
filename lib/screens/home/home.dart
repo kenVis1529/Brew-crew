@@ -1,4 +1,5 @@
 import 'package:brewcrew/modules/brew.dart';
+import 'package:brewcrew/screens/home/setting_form.dart';
 import 'package:brewcrew/services/auth.dart';
 import 'package:brewcrew/services/database.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,18 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// Bottom sheet - giống như một menu hay hộp thoại,
+    /// tránh người dùng sử dụng phần còn lại của app
+    void showBottomSheet() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) => Container(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 40.0, horizontal: 60.0),
+                child: const SettingForm(),
+              ));
+    }
+
     /// Khởi tạo dòng Stream ở Home
     return StreamProvider<List<Brew>?>.value(
       initialData: const [],
@@ -41,6 +54,21 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
+            
+            // Nút setting
+            TextButton.icon(
+              onPressed: () {
+                showBottomSheet();
+              },
+              label: const Text('Setting',
+                  style: TextStyle(
+                    color: Colors.white,
+                  )),
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
+            )
           ],
         ),
         body: const BrewList(),
