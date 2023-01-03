@@ -11,9 +11,9 @@ class DatabaseService {
       FirebaseFirestore.instance.collection("brews");
 
   /// updateUserData dùng để cập nhật thông tin ly coffee của người dùng
-  Future updateUserData(String sugar, String name, int strength) async {
+  Future updateUserData(String sugars, String name, int strength) async {
     return await brewCollection.doc(uid).set({
-      "sugar": sugar,
+      "sugars": sugars,
       "name": name,
       "strength": strength,
     });
@@ -24,7 +24,7 @@ class DatabaseService {
     return snapshot.docs
         .map((doc) => Brew(
               name: doc.get('name') ?? '',
-              sugars: doc.get('sugar') ?? '0',
+              sugars: doc.get('sugars') ?? '0',
               strength: doc.get('strength') ?? 0,
             ))
         .toList();
