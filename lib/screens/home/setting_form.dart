@@ -15,7 +15,7 @@ class _SettingFormState extends State<SettingForm> {
   List<String> sugars = ["0", "1", "2", "3", "4", "5"];
   String _currentName = "";
   String _currentSugars = "0";
-  int _currentStrength = 0;
+  int _currentStrength = 100;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,8 @@ class _SettingFormState extends State<SettingForm> {
         children: [
           const Text('Change your setting'),
           const SizedBox(height: 20.0),
+
+          /// Tên khách hàng
           TextFormField(
             decoration: textInputDecoration,
             validator: (value) => value!.isEmpty ? "Enter your name" : null,
@@ -33,6 +35,7 @@ class _SettingFormState extends State<SettingForm> {
           const SizedBox(height: 20.0),
 
           // Dropdown
+          /// Chọn mức độ đường cho cafe
           DropdownButtonFormField(
               value: _currentSugars,
               items: sugars.map((sugar) {
@@ -45,7 +48,18 @@ class _SettingFormState extends State<SettingForm> {
           const SizedBox(height: 20.0),
 
           // Slider
-
+          /// Dùng để chọn mức độ của cafe
+          Slider(
+            value: _currentStrength.toDouble(),
+            min: 100, // Giá trị ngoài cùng bên trái
+            max: 900, // Giá trị ngoài cùng bên phải
+            divisions: 8, // Số mức mà slider có thể kéo
+            activeColor:
+                Colors.brown[_currentStrength], // Màu của thanh được chọn
+            inactiveColor: Colors.brown[_currentStrength], // Màu của thanh tổng
+            onChanged: (value) =>
+                setState(() => _currentStrength = value.round()),
+          ),
           // Confirm button
           ElevatedButton(
               onPressed: () {

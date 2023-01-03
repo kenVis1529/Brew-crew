@@ -52,7 +52,7 @@ class AuthService {
 
       /// Tạo một document mới cho người dùng mới
       await DatabaseService(uid: user?.uid)
-          .updateUserData("0", "New user", 1000);
+          .updateUserData("0", "New user", 100);
       return _userFromFirebaseuser(user);
     } catch (e) {
       log(e.toString());
