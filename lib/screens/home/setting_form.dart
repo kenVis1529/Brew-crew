@@ -28,7 +28,16 @@ class _SettingFormState extends State<SettingForm> {
 
           /// Tên khách hàng
           TextFormField(
-            decoration: textInputDecoration,
+            initialValue: _currentName,
+            decoration: textInputDecoration.copyWith(
+              hintText: "Name",
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey,
+                  width: 2.0,
+                ),
+              ),
+            ),
             validator: (value) => value!.isEmpty ? "Enter your name" : null,
             onChanged: (value) => setState(() => _currentName = value),
           ),
