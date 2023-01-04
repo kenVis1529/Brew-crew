@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:brewcrew/modules/user.dart';
 import 'package:brewcrew/services/database.dart';
 import 'package:brewcrew/shared/constants.dart';
@@ -88,10 +87,24 @@ class _SettingFormState extends State<SettingForm> {
                   ),
                   // Confirm button
                   ElevatedButton(
-                      onPressed: () {
-                        log(_currentName!);
-                        log(_currentSugars!);
-                        log(_currentStrength.toString());
+                      onPressed: () async {
+                        /// Nếu thông tin điền vào hợp lệ, cập nhật thông tin người dùng trên FireStore
+                        if (_formKey.currentState!.validate()) {
+                          await DatabaseService(uid: user?.uid).updateUserData(
+                            (_currentSugars ?? userData!.sugars)
+                                .toString(), // Sugars
+                            (_currentName ?? userData?.name).toString(), // Name
+                            _currentStrength ?? userData!.strength!, // Strength
+                          );
+                          log("1");
+                        }
+
+                        /// Sẽ không thoát khỏi Setting Form nếu State không được liên kết với BuildContext
+                        /// * (Tìm hiểu thêm về mounted)
+                        if (!mounted) {
+                          return;
+                        }
+                        Navigator.pop(context);
                       },
                       child: const Text('Confirm'))
                 ],
